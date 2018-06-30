@@ -33,6 +33,8 @@
     
     self.navigationItem.title = @"XMTextView";
     
+    self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = self.view.bounds;
     scrollView.delegate = self;
@@ -44,7 +46,20 @@
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
     [scrollView addSubview:tv];
     tv.textViewListening = ^(NSString *textViewStr) {
-        NSLog(@"监听输入的内容：%@",textViewStr);
+        NSLog(@"tv监听输入的内容：%@",textViewStr);
+    };
+    
+    XMTextView *tv2 = [[XMTextView alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(tv.frame)+20, self.view.frame.size.width-2*16, 200)];
+    tv2.placeholder = @"自定义placeholder";
+    tv2.placeholderColor = [UIColor blueColor];
+    tv2.borderLineColor = [UIColor redColor];
+    tv2.tvColor = [UIColor greenColor];
+    tv2.tvFont = [UIFont systemFontOfSize:18];
+    tv2.textMaxNum = 1000;
+    tv2.maxNumState = XMMaxNumStateDiminishing;
+    [scrollView addSubview:tv2];
+    tv2.textViewListening = ^(NSString *textViewStr) {
+        NSLog(@"tv2监听输入的内容：%@",textViewStr);
     };
 }
 
