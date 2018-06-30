@@ -1,6 +1,6 @@
 # XMTextView
 UITextView扩展
-![Platform](https://wx2.sinaimg.cn/mw690/e067b31fgy1fst99hep4bj20af0mkmxe.jpg)
+![Platform](https://wx3.sinaimg.cn/mw690/e067b31fgy1fstabpijwjj20af0mkjrt.jpg)
 
 # 一，使用步骤
 1，导入XMTextView文件夹
