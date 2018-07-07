@@ -124,6 +124,13 @@ static char *changeLocation = "location";
     }
 }
 
+- (void)dealloc{
+    
+//    NSLog(@"font dealloc");
+    [self removeObserver:self forKeyPath:@"font"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 /**
  *  更新label信息
  */

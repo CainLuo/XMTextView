@@ -208,7 +208,6 @@
         self.numLabel.text = [NSString stringWithFormat:@"%d/%d",self.textView.text.length,self.textMaxNum];
     }else{
         
-        NSLog(@"%d----%d",self.textMaxNum,self.textView.text.length);
         self.numLabel.text = [NSString stringWithFormat:@"%d",self.textMaxNum-self.textView.text.length];
     }
     
@@ -223,6 +222,12 @@
     self.numLabel.frame = CGRectMake(self.LRSpace, self.frame.size.height-30, self.frame.size.width-2*self.LRSpace, 30);
     self.textView.frame = CGRectMake(self.LRSpace, self.topSpace, self.numLabel.frame.size.width, self.frame.size.height-30);
     
+}
+
+- (void)dealloc{
+    
+//    NSLog(@"dealloc");
+    [self removeFromSuperview];
 }
 
 @end

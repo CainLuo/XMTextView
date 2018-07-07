@@ -32,7 +32,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.navigationItem.title = @"XMTextView";
-    
     self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     
     UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -44,6 +43,7 @@
     [self.view addSubview:scrollView];
     
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
+    tv.tvFont = [UIFont systemFontOfSize:20];
     [scrollView addSubview:tv];
     tv.textViewListening = ^(NSString *textViewStr) {
         NSLog(@"tv监听输入的内容：%@",textViewStr);
@@ -60,6 +60,7 @@
     [scrollView addSubview:tv2];
     tv2.textViewListening = ^(NSString *textViewStr) {
         NSLog(@"tv2监听输入的内容：%@",textViewStr);
+        
     };
 }
 
@@ -68,6 +69,7 @@
     
     // 取消键盘
     [self.view endEditing:YES];
+    
 }
 
 
