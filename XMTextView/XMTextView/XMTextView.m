@@ -12,9 +12,9 @@
 @interface XMTextView ()<UITextViewDelegate>
 
 /** textView */
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, weak) UITextView *textView;
 /** num */
-@property (nonatomic, strong) UILabel *numLabel;
+@property (nonatomic, weak) UILabel *numLabel;
 
 @end
 
@@ -22,19 +22,21 @@
 
 - (UITextView *)textView{
     if (!_textView) {
-        _textView = [[UITextView alloc] init];
-        _textView.delegate = self;
-        _textView.textAlignment = NSTextAlignmentJustified;
-        [self addSubview:_textView];
+        UITextView *textView = [[UITextView alloc] init];
+        textView.delegate = self;
+        textView.textAlignment = NSTextAlignmentJustified;
+        [self addSubview:textView];
+        _textView = textView;
     }
     return _textView;
 }
 
 - (UILabel *)numLabel{
     if (!_numLabel) {
-        _numLabel = [[UILabel alloc] init];
-        _numLabel.textAlignment = NSTextAlignmentRight;
-        [self addSubview:_numLabel];
+        UILabel *numLabel = [[UILabel alloc] init];
+        numLabel.textAlignment = NSTextAlignmentRight;
+        [self addSubview:numLabel];
+        _numLabel = numLabel;
     }
     return _numLabel;
 }
@@ -220,7 +222,7 @@
 - (void)layoutFrame{
     
     self.numLabel.frame = CGRectMake(self.LRSpace, self.frame.size.height-30, self.frame.size.width-2*self.LRSpace, 30);
-    self.textView.frame = CGRectMake(self.LRSpace, self.topSpace, self.numLabel.frame.size.width, self.frame.size.height-30);
+    self.textView.frame = CGRectMake(self.LRSpace, self.topSpace, self.numLabel.frame.size.width, self.frame.size.height-40);
     
 }
 

@@ -10,16 +10,17 @@
 
 @interface UITextView (XMExtension)
 
+/** placeholdLabel */
 @property(nonatomic,readonly)  UILabel *placeholdLabel;
-
-@property(nonatomic,strong) IBInspectable NSString *placeholder;
-
-@property(nonatomic,strong) IBInspectable UIColor *placeholderColor;
-
+/** placeholder */
+@property(nonatomic,copy) NSString *placeholder;
+/** placeholder颜色 */
+@property(nonatomic,copy) UIColor *placeholderColor;
+/** 富文本 */
 @property(nonnull,strong) NSAttributedString *attributePlaceholder;
-
+/** 位置 */
 @property(nonatomic,assign) CGPoint location;
-
+/** 默认颜色 */
 + (UIColor *)defaultColor;
 
 @end

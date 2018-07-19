@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "XMTextView.h"
 #import "UITextView+XMExtension.h"
+//__weak block 的宏定义
+#define WEAKSELF typeof(self) __weak weakSelf = self;
 
 /** 是否是iphoneX设备 */
 #define IS_PhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -38,15 +40,17 @@
     scrollView.frame = self.view.bounds;
     scrollView.delegate = self;
     scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.contentSize = CGSizeMake(WIDTH, SCROLLVIEW_CONTENTSIZE);
     scrollView.contentInset = UIEdgeInsetsMake(NavFrame.size.height, 0, 0, 0);
     [self.view addSubview:scrollView];
     
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
     tv.tvFont = [UIFont systemFontOfSize:20];
     [scrollView addSubview:tv];
+    
+    WEAKSELF
     tv.textViewListening = ^(NSString *textViewStr) {
         NSLog(@"tv监听输入的内容：%@",textViewStr);
+//        weakSelf.
     };
     
     XMTextView *tv2 = [[XMTextView alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(tv.frame)+20, self.view.frame.size.width-2*16, 200)];
@@ -60,8 +64,17 @@
     [scrollView addSubview:tv2];
     tv2.textViewListening = ^(NSString *textViewStr) {
         NSLog(@"tv2监听输入的内容：%@",textViewStr);
-        
     };
+    
+    UITextView *tv3 = [[UITextView alloc] init];
+    tv3.frame = CGRectMake(16, CGRectGetMaxY(tv2.frame)+20, self.view.frame.size.width-2*16, 200);
+    tv3.placeholder = @"UITextView可以直接使用placeholder和placeholderColor属性";
+    tv3.placeholderColor = [UIColor purpleColor];
+    tv3.textColor = [UIColor redColor];
+    tv3.font = [UIFont systemFontOfSize:20];
+    [scrollView addSubview:tv3];
+    
+    scrollView.contentSize = CGSizeMake(WIDTH, 1000);
 }
 
 #pragma  mark - 滚动scrollView 键盘退下

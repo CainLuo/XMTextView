@@ -1,8 +1,7 @@
 # XMTextView
-XMTextView是UITextView的扩展的类，加入了placeholder，placeholderColor属性和文字数量的功能，
-UITextView也可以直接使用placeholder和placeholderColor属性，大大提高开发的时间，简化开发。
+XMTextView是UITextView的扩展的类，加入了placeholder和文字数量的功能，大大提高开发的时间，简化开发。
 
-![Platform](https://wx2.sinaimg.cn/mw690/e067b31fgy1ftf4sf5xedj20af0mk759.jpg)
+![Platform](https://wx3.sinaimg.cn/mw690/e067b31fgy1fstabpijwjj20af0mkjrt.jpg)
 
 # 一，使用步骤
 1，导入XMTextView文件夹
@@ -92,18 +91,15 @@ frame设置一定要在设置其他属性之前
 # 五，版本记录
 
 - 2018-06-30　　初版
-- 2018-07-19　　优化性能
 
 
 # 六，更多
 
 1，如果觉得可以，请给个星星✨✨✨✨✨，谢谢🙏
 
-2，如果您发现了bug请尽可能详细地描述系统版本、手机型号和复现步骤等信息 提一个issue.
+1，如果您发现了bug请尽可能详细地描述系统版本、手机型号和复现步骤等信息 提一个issue.
 
-3，你如果还有什么功能需求，也直接 提一个issue.
-
-4，我的简书http://www.jianshu.com/p/6e82fd2fcb01
+2，我的简书http://www.jianshu.com/p/6e82fd2fcb01
 
 
 

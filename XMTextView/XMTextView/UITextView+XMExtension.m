@@ -19,22 +19,27 @@ static char *changeLocation = "location";
  method_exchangeImplementations(class_getInstanceMethod(self.class,NSSelectorFromString(@"dealloc") ),class_getInstanceMethod(self.class, NSSelectorFromString(@"swizzledDealloc")));
 }
 
-+ (void)swizzledDealloc {
+- (void)swizzledDealloc {
     
+    NSLog(@"swizzledDealloc");
+    // 移除观察
+    [self removeObserver:self forKeyPath:@"font"];
     //移除监听
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [self swizzledDealloc];
 }
 
-/***  设置placeholderLabel */
-- (UILabel *)placeholdLabel
-{
+#pragma mark -   设置placeholderLabel
+- (UILabel *)placeholdLabel{
+    
     UILabel *label = objc_getAssociatedObject(self, labelKey);
     if (!label) {
         label = [[UILabel alloc] init];
         label.textAlignment = NSTextAlignmentLeft;
         label.numberOfLines = 0;
         label.textColor = [self.class defaultColor];
+        
         objc_setAssociatedObject(self, labelKey, label, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         //添加通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLabel) name:UITextViewTextDidChangeNotification object:nil];
@@ -44,7 +49,7 @@ static char *changeLocation = "location";
     return label;
 }
 
-/***  设置默认颜色 */
+#pragma mark -  设置默认颜色 
 + (UIColor *)defaultColor{
     
     static UIColor *color = nil;
@@ -54,7 +59,6 @@ static char *changeLocation = "location";
         textField.placeholder = @" ";
         color = [textField valueForKeyPath:@"_placeholderLabel.textColor"];
     });
-    
     return color;
 }
 
@@ -65,30 +69,30 @@ static char *changeLocation = "location";
     [self updateLabel];
 }
 
-- (NSString *)placeholder
-{
+- (NSString *)placeholder{
+    
     return self.placeholdLabel.text;
 }
 
-- (void)setPlaceholderColor:(UIColor *)placeholderColor
-{
+- (void)setPlaceholderColor:(UIColor *)placeholderColor{
+    
     self.placeholdLabel.textColor = placeholderColor;
     [self updateLabel];
 }
 
-- (UIColor *)placeholderColor
-{
+- (UIColor *)placeholderColor{
+    
     return self.placeholdLabel.textColor;
 }
 
-- (void)setAttributePlaceholder:(NSAttributedString *)attributePlaceholder
-{
+- (void)setAttributePlaceholder:(NSAttributedString *)attributePlaceholder{
+    
     self.placeholdLabel.attributedText = attributePlaceholder;
     [self updateLabel];
 }
 
-- (NSAttributedString *)attributePlaceholder
-{
+- (NSAttributedString *)attributePlaceholder{
+    
     return self.placeholdLabel.attributedText;
 }
 
@@ -98,15 +102,15 @@ static char *changeLocation = "location";
     [self updateLabel];
 }
 
--(CGPoint)location{
+- (CGPoint)location{
     
     return CGPointFromString(objc_getAssociatedObject(self, changeLocation));
 }
 
-//是否需要调整字体
+#pragma mark - 是否需要调整字体
 - (BOOL)needAdjustFont{
     
-    return [objc_getAssociatedObject(self, needAdjust) boolValue ];
+    return [objc_getAssociatedObject(self, needAdjust) boolValue];
 }
 
 - (void)setNeedAdjustFont:(BOOL)needAdjustFont{
@@ -115,25 +119,16 @@ static char *changeLocation = "location";
 }
 
 #pragma mark - observer font KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"font"])
-    {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"font"]){
+        
         self.needAdjustFont = YES;
         [self updateLabel];
     }
 }
 
-- (void)dealloc{
-    
-//    NSLog(@"font dealloc");
-    [self removeObserver:self forKeyPath:@"font"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-/**
- *  更新label信息
- */
+#pragma mark -  更新label信息
 - (void)updateLabel{
     
     if (self.text.length) {
@@ -144,13 +139,13 @@ static char *changeLocation = "location";
     //显示label
     [self insertSubview:self.placeholdLabel atIndex:0];
     
-    //是否需要更新字体（NO 采用默认字体大小）
+    // 是否需要更新字体（NO 采用默认字体大小）
     if (self.needAdjustFont) {
         self.placeholdLabel.font = self.font;
         self.needAdjustFont = NO;
     }
     
-    CGFloat  lineFragmentPadding =  self.textContainer.lineFragmentPadding;  //边距
+    CGFloat lineFragmentPadding =  self.textContainer.lineFragmentPadding;  //边距
     UIEdgeInsets contentInset = self.textContainerInset;
     
     //设置label frame
