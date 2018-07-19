@@ -12,7 +12,7 @@ UITextView也可以直接使用placeholder和placeholderColor属性大大提高�
 
 3，使用方法：
 
-   //  XMTextView的使用
+    //  XMTextView的使用
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
     [scrollView addSubview:tv];
     tv.textViewListening = ^(NSString *textViewStr) {
