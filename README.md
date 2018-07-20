@@ -114,7 +114,7 @@ UITextView也可以直接使用placeholder和placeholderColor属性大大节省�
 
 3，你如果还有什么功能需求，也直接 提一个issue.
 
-4，我的简书http://www.jianshu.com/p/6e82fd2fcb01
+4，我的简书https://www.jianshu.com/p/e9c08ad811b3
 
 
 
