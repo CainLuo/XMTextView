@@ -15,6 +15,10 @@
 @property (nonatomic, weak) UITextView *textView;
 /** num */
 @property (nonatomic, weak) UILabel *numLabel;
+/** 是否基本信息初始化了 */
+@property (nonatomic, assign) BOOL isConfigInit;
+/** 占位文字 */
+@property (nonatomic, copy) NSString *tempText;
 
 @end
 
@@ -47,8 +51,12 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        // 添加配置
-        [self addConfig];
+        // 未初始化
+        if (!self.isConfigInit){
+            
+            // 添加配置
+            [self addConfig];
+        }
     }
     return self;
 }
@@ -59,8 +67,12 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        // 添加配置
-        [self addConfig];
+        // 未初始化
+        if (!self.isConfigInit){
+            
+            // 添加配置
+            [self addConfig];
+        }
     }
     return self;
 }
@@ -72,15 +84,17 @@
     self.borderLineWidth = 1;
     self.borderLineColor = [UIColor lightGrayColor];
     self.topSpace = 8;
-    self.LRSpace = 8;
+    self.leftAndRightSpace = 8;
     self.textMaxNum = 200;
-    self.tvColor = [UIColor blackColor];
-    self.tvFont = [UIFont systemFontOfSize:14];
+    self.textColor = [UIColor blackColor];
+    self.textFont = [UIFont systemFontOfSize:14];
     self.placeholder = @"请输入内容";
     self.placeholderColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
     self.maxNumColor = [UIColor blackColor];
     self.maxNumFont = [UIFont systemFontOfSize:12];
     self.maxNumState = XMMaxNumStateNormal;
+    
+    self.isConfigInit = YES;
     
     // 显示内容
     [self showContent];
@@ -100,10 +114,10 @@
     [self showContent];
 }
 
-- (void)setContentStr:(NSString *)contentStr{
+- (void)setText:(NSString *)text{
     
-    _contentStr = contentStr;
-    
+    _text = text;
+    self.tempText = text;
     [self showContent];
 }
 
@@ -121,16 +135,16 @@
     [self showContent];
 }
 
-- (void)setTvColor:(UIColor *)tvColor{
+- (void)setTextColor:(UIColor *)textColor{
     
-    _tvColor = tvColor;
+    _textColor = textColor;
     
     [self showContent];
 }
 
-- (void)setTvFont:(UIFont *)tvFont{
+- (void)setTextFont:(UIFont *)textFont{
     
-    _tvFont = tvFont;
+    _textFont = textFont;
     
     [self showContent];
 }
@@ -181,19 +195,18 @@
         self.layer.borderWidth = self.borderLineWidth;
         self.layer.borderColor = self.borderLineColor.CGColor;
     }else{
-        
         self.layer.borderWidth = 0.00;
         self.layer.borderColor = [UIColor clearColor].CGColor;
     }
-    self.textView.textColor = self.tvColor;
-    self.textView.font = self.tvFont;
+    self.textView.textColor = self.textColor;
+    self.textView.font = self.textFont;
     self.numLabel.textColor = self.maxNumColor;
     self.numLabel.font = self.maxNumFont;
     
     self.textView.placeholder = self.placeholder;
     self.textView.placeholderColor = self.placeholderColor;
-
-    self.textView.text = self.contentStr;
+    
+    self.textView.text = self.tempText;
     
     [self textViewDidChange:self.textView];
 }
@@ -216,19 +229,19 @@
     if (self.textViewListening) {
         self.textViewListening(self.textView.text);
     }
+    self.tempText = self.textView.text;
 }
 
 #pragma mark - 布局
 - (void)layoutFrame{
     
-    self.numLabel.frame = CGRectMake(self.LRSpace, self.frame.size.height-30, self.frame.size.width-2*self.LRSpace, 30);
-    self.textView.frame = CGRectMake(self.LRSpace, self.topSpace, self.numLabel.frame.size.width, self.frame.size.height-40);
-    
+    self.numLabel.frame = CGRectMake(self.leftAndRightSpace, self.frame.size.height-30, self.frame.size.width-2*self.leftAndRightSpace, 30);
+    self.textView.frame = CGRectMake(self.leftAndRightSpace, self.topSpace, self.numLabel.frame.size.width, self.frame.size.height-40);
 }
 
 - (void)dealloc{
     
-//    NSLog(@"dealloc");
+    //    NSLog(@"dealloc");
     [self removeFromSuperview];
 }
 

@@ -26,7 +26,7 @@ typedef void(^XMBackText)(NSString *textViewStr);
 @property (nonatomic, assign) CGFloat topSpace;
 
 /** 左 右 边距 (默认8)*/
-@property (nonatomic, assign) CGFloat LRSpace;
+@property (nonatomic, assign) CGFloat leftAndRightSpace;
 
 /** 边框线颜色 */
 @property (nonatomic, strong) UIColor *borderLineColor;
@@ -35,13 +35,13 @@ typedef void(^XMBackText)(NSString *textViewStr);
 @property (nonatomic, assign) CGFloat borderLineWidth;
 
 /** textView的内容 */
-@property (nonatomic, assign) NSString *contentStr;
+@property (nonatomic, copy) NSString *text;
 
 /** textView 文字颜色 (默认黑色) */
-@property (nonatomic, strong) UIColor *tvColor;
+@property (nonatomic, strong) UIColor *textColor;
 
 /** textView 字体大小 (默认14) */
-@property (nonatomic, strong) UIFont *tvFont;
+@property (nonatomic, strong) UIFont *textFont;
 
 /** 占位文字 (默认：请输入内容) */
 @property (nonatomic, copy) NSString *placeholder;

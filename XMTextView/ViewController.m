@@ -44,7 +44,7 @@
     [self.view addSubview:scrollView];
     
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
-    tv.tvFont = [UIFont systemFontOfSize:20];
+    tv.textFont = [UIFont systemFontOfSize:20];
     [scrollView addSubview:tv];
     
     WEAKSELF
@@ -57,8 +57,8 @@
     tv2.placeholder = @"自定义placeholder";
     tv2.placeholderColor = [UIColor blueColor];
     tv2.borderLineColor = [UIColor redColor];
-    tv2.tvColor = [UIColor greenColor];
-    tv2.tvFont = [UIFont systemFontOfSize:18];
+    tv2.textColor = [UIColor greenColor];
+    tv2.textFont = [UIFont systemFontOfSize:18];
     tv2.textMaxNum = 1000;
     tv2.maxNumState = XMMaxNumStateDiminishing;
     [scrollView addSubview:tv2];
