@@ -11,8 +11,8 @@ UITextView也可以直接使用placeholder和placeholderColor属性大大节省�
 2，引用#import "XMTextView.h"头文件
 
 3，使用方法：
-
-    //  XMTextView的使用
+```
+//  XMTextView的使用
     XMTextView *tv = [[XMTextView alloc] initWithFrame:CGRectMake(16, 10, self.view.frame.size.width-2*16, 200)];
     [scrollView addSubview:tv];
     tv.textViewListening = ^(NSString *textViewStr) {
@@ -27,8 +27,10 @@ UITextView也可以直接使用placeholder和placeholderColor属性大大节省�
     tv3.textColor = [UIColor redColor];
     tv3.font = [UIFont systemFontOfSize:20];
     [scrollView addSubview:tv3];
+
    
 # 二，主要属性设置
+
 
     /** 文字最多字符数量显示类型 **/
 
@@ -101,6 +103,5 @@ UITextView也可以直接使用placeholder和placeholderColor属性大大节省�
 3，你如果还有什么功能需求，也直接 提一个issue.
 
 4，我的简书https://www.jianshu.com/p/e9c08ad811b3
-
 
 
