@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /** 文字最多字符数量显示类型 **/
 typedef enum {
     XMMaxNumStateNormal = 0,  // 默认模式（0/200）
@@ -52,6 +53,9 @@ typedef void(^XMBackText)(NSString *textViewStr);
 /** 文字最多数量 (默认200个字符)*/
 @property (nonatomic, assign) int textMaxNum;
 
+/// 是否显示递减数字UILabel, default: NO
+@property (nonatomic, assign) BOOL isHiddenNumber;
+
 /** Num 文字颜色 (默认黑色) */
 @property (nonatomic, strong) UIColor *maxNumColor;
 
@@ -66,3 +70,4 @@ typedef void(^XMBackText)(NSString *textViewStr);
 
 
 @end
+NS_ASSUME_NONNULL_END
