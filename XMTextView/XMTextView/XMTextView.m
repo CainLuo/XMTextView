@@ -50,6 +50,8 @@
     if (self = [super init]) {
         
         self.backgroundColor = [UIColor whiteColor];
+        self.isHiddenNumber = NO;
+        self.numLabel.hidden = self.isHiddenNumber;
         
         // 未初始化
         if (!self.isConfigInit){
@@ -163,6 +165,13 @@
     [self showContent];
 }
 
+- (void)setIsHiddenNumber:(BOOL)isHiddenNumber {
+    
+    _isHiddenNumber = isHiddenNumber;
+    
+    [self showContent];
+}
+
 - (void)setMaxNumColor:(UIColor *)maxNumColor{
     
     _maxNumColor = maxNumColor;
@@ -205,7 +214,7 @@
     
     self.textView.placeholder = self.placeholder;
     self.textView.placeholderColor = self.placeholderColor;
-    
+    self.numLabel.hidden = self.isHiddenNumber;
     self.textView.text = self.tempText;
     
     [self textViewDidChange:self.textView];
@@ -220,10 +229,10 @@
     
     if (self.maxNumState == XMMaxNumStateNormal) {
         
-        self.numLabel.text = [NSString stringWithFormat:@"%d/%d",self.textView.text.length,self.textMaxNum];
+        self.numLabel.text = [NSString stringWithFormat:@"%lu/%d",(unsigned long)self.textView.text.length,self.textMaxNum];
     }else{
         
-        self.numLabel.text = [NSString stringWithFormat:@"%d",self.textMaxNum-self.textView.text.length];
+        self.numLabel.text = [NSString stringWithFormat:@"%lu",self.textMaxNum-self.textView.text.length];
     }
     
     if (self.textViewListening) {
