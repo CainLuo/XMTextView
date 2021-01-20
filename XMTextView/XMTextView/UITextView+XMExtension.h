@@ -8,19 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface UITextView (XMExtension)
 
 /** placeholdLabel */
-@property(nonatomic,readonly)  UILabel *placeholdLabel;
+@property (nonatomic, readonly)  UILabel *placeholdLabel;
 /** placeholder */
-@property(nonatomic,copy) NSString *placeholder;
+@property (nonatomic, copy) NSString *placeholder;
 /** placeholder颜色 */
-@property(nonatomic,copy) UIColor *placeholderColor;
+@property (nonatomic, copy) UIColor *placeholderColor;
 /** 富文本 */
-@property(nonnull,strong) NSAttributedString *attributePlaceholder;
+@property (nonnull, strong) NSAttributedString *attributePlaceholder;
 /** 位置 */
-@property(nonatomic,assign) CGPoint location;
+@property (nonatomic, assign) CGPoint location;
 /** 默认颜色 */
 + (UIColor *)defaultColor;
 
 @end
+NS_ASSUME_NONNULL_END
