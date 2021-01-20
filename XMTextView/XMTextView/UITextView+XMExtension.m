@@ -21,7 +21,7 @@ static char *changeLocation = "location";
 
 - (void)swizzledDealloc {
     
-    NSLog(@"swizzledDealloc");
+//    NSLog(@"swizzledDealloc");
     // 移除观察
     [self removeObserver:self forKeyPath:@"font"];
     //移除监听
